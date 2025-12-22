@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 	"log"
@@ -43,7 +44,7 @@ func main() {
 		log.Fatal("Error loading .env file")
 	}
 
-	var location string 
+	var location string
 
 	if len(os.Args) >= 1 {
 		location = os.Args[1]
@@ -55,9 +56,9 @@ func main() {
 
 	resp, err := http.Get(
 		"http://api.weatherapi.com/v1/current.json?key=" +
-		WEATHER_API + 
-		"&q=" + 
-		location + 
+		WEATHER_API +
+		"&q=" +
+		location +
 		"&aqi=no",
 	)
 
@@ -66,16 +67,17 @@ func main() {
 	} else {
 		defer resp.Body.Close()
 	}
-	
-	// if resp.StatusCode != 200 {
-	// 	fmt.Println("Error: Response code not 200")
-	// } else {
-	// 	fmt.Println("Success: Response Code 200")
-	// }
 
-	json, err := io.ReadAll(resp.Body)
+	if resp.StatusCode != 200 {
+		fmt.Println("Error: Response code not 200")
+	} else {
+		fmt.Println("Success: Response Code 200")
+	}
 
-	fmt.Println(string(json))
+	data, err := io.ReadAll(resp.Body)
+	var weather Weather
+	json.Unmarshal(data, &weather)
 
+	fmt.Println(weather)
 
 }
