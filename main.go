@@ -68,12 +68,6 @@ func main() {
 		defer resp.Body.Close()
 	}
 
-	if resp.StatusCode != 200 {
-		fmt.Println("Error: Response code not 200")
-	} else {
-		fmt.Println("Success: Response Code 200")
-	}
-
 	data, err := io.ReadAll(resp.Body)
 	if err != nil {
 		fmt.Println("Error has occured", err)
@@ -82,7 +76,7 @@ func main() {
 	var weather Weather
 	json.Unmarshal(data, &weather)
 
-	struct_location, current, _ := weather.Location, weather.Current, weather.Forecast 
+	struct_location, current, _ := weather.Location, weather.Current, weather.Forecast
 
 	message := fmt.Sprintf(
 		"%s, %s  %0.2f, %s",
