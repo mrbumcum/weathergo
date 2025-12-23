@@ -75,9 +75,25 @@ func main() {
 	}
 
 	data, err := io.ReadAll(resp.Body)
+	if err != nil {
+		fmt.Println("Error has occured", err)
+	}
+
 	var weather Weather
 	json.Unmarshal(data, &weather)
 
-	fmt.Println(weather)
+	struct_location, current, _ := weather.Location, weather.Current, weather.Forecast 
+
+	message := fmt.Sprintf(
+		"%s, %s  %0.2f, %s",
+		struct_location.Name,
+		struct_location.Country,
+		current.TempF,
+		current.Condition.Text,
+	)
+
+	fmt.Println(message)
+
+
 
 }
