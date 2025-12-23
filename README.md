@@ -16,4 +16,4 @@ It will return the following information:
 
 --
 ## Design architecture
-![WeatherGo Design Architecture](./architecture-diagram.png)
+![WeatherGo Design Architecture](./architecture_diagram.png)
