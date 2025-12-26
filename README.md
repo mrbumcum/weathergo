@@ -2,8 +2,6 @@
 
 WeatherGo is a simple Go-based CLI tool that fetches current weather information for a given city using a public weather API. It uses Redis caching to reduce unnecessary API calls and improve performance.
 
---
-
 ## **What It Does**
 Run the CLI with the city name
 
@@ -18,12 +16,8 @@ go run . London
 The CLI returns current weather information about the specified city:
 London, United Kingdom  48.40, Mist
 
---
-
 ## Design architecture
 ![WeatherGo Design Architecture](./architecture_diagram.png)
-
---
 
 Setup:
 1. Clone the repository:
